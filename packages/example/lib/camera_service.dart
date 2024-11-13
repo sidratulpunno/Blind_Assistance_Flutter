@@ -3,6 +3,10 @@ import 'package:camera/camera.dart';
 // Avoid this for web
 
 class CameraService {
+  @override
+  void initState() {
+    initializeCamera();
+  }
   CameraController? _controller;
 
   Future<void> initializeCamera() async {

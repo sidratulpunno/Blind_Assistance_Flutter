@@ -16,6 +16,7 @@ class MyApp extends StatelessWidget {
       home: HomeScreen(),
       routes: {
         "/objectDetector": (context) => ObjectDetectorView(),
+        "/home": (context) => HomeScreen(),
 
       },// Set ObjectDetectorView as the main page
     );
