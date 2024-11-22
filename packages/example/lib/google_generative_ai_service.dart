@@ -21,7 +21,7 @@ class GoogleGenerativeAIService {
         AppState.textPart='i can not see please give me direction to go forward within 20 words and do not tell sorry and how many steps to go :';
       }else if(AppState.prompt==2){
         print('noooooooooooooooooooooooooooooooooooooo');
-       AppState.textPart='please describe the image:';
+       AppState.textPart='please describe the image in normal text:';
       }
 
       // Read image bytes

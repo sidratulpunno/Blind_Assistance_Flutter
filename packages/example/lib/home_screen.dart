@@ -49,9 +49,13 @@ class _HomeScreenState extends State<HomeScreen> {
     } else if (command.toLowerCase().contains("describe")) {
       AppState.prompt = 2;
       _captureAndProcessPhoto();
-    } else if (command.toLowerCase().contains("stop")) {
+    } else if (command.toLowerCase().contains("stop direction")) {
       _stopContinuousCapture();
     }
+    else if (command.toLowerCase().contains("offline direction")) {
+      _object_detector();
+    }
+
   }
 
   void _startContinuousCapture() {
@@ -135,11 +139,7 @@ class _HomeScreenState extends State<HomeScreen> {
               onPressed: _object_detector,
               child: Text("Offline direction"),
             ),
-            SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () => _voiceCommandService.startListening(_onVoiceCommand),
-              child: Text("Start Listening"),
-            ),
+
             SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
@@ -161,6 +161,18 @@ class _HomeScreenState extends State<HomeScreen> {
               },
               child: Text("Describe"),
             ),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () => _voiceCommandService.startListening(_onVoiceCommand),
+              style: ElevatedButton.styleFrom(
+
+                padding: EdgeInsets.symmetric(horizontal: 90.0, vertical: 130.0), // Increase padding
+                textStyle: TextStyle(fontSize: 20),
+                // Increase font size
+              ),
+              child: Text("Start Listening"),
+            ),
+
           ],
         ),
       ),

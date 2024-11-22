@@ -1,22 +1,32 @@
 import 'package:camera/camera.dart';
-// This won't work on the web
-// Avoid this for web
+import 'package:permission_handler/permission_handler.dart';
 
 class CameraService {
-  @override
-  void initState() {
-    initializeCamera();
-  }
   CameraController? _controller;
 
   Future<void> initializeCamera() async {
-    final cameras = await availableCameras();
-    _controller = CameraController(cameras.first, ResolutionPreset.low);
-    await _controller!.initialize();
+    // Request and check camera permission
+    final status = await Permission.camera.request();
+    if (status.isGranted) {
+      final cameras = await availableCameras();
+      _controller = CameraController(cameras.first, ResolutionPreset.low);
+      await _controller!.initialize();
+    } else if (status.isDenied || status.isPermanentlyDenied) {
+      throw Exception("Camera permission denied.");
+    }
   }
 
   Future<XFile> capturePhoto() async {
+    if (_controller == null || !_controller!.value.isInitialized) {
+      initializeCamera();
+
+
+    }
     final image = await _controller!.takePicture();
-    return image; // Return XFile
+    return image;
+  }
+
+  void dispose() {
+    _controller?.dispose();
   }
 }

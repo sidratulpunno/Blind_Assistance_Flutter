@@ -15,9 +15,16 @@ class VoiceCommandService {
           onCommandRecognized(result.recognizedWords);
         }else if (result.recognizedWords.contains("give direction")) {
           onCommandRecognized(result.recognizedWords);
-        }else if (result.recognizedWords.contains("stop")) {
+        }else if (result.recognizedWords.contains("stop direction")) {
           onCommandRecognized(result.recognizedWords);
         }
+        else if (result.recognizedWords.contains("offline direction")) {
+          onCommandRecognized(result.recognizedWords);
+        }
+        else if (result.recognizedWords.contains("go to homepage")) {
+          onCommandRecognized(result.recognizedWords);
+        }
+
       });
     }
   }

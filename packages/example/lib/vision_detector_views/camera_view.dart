@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_mlkit_commons/google_mlkit_commons.dart';
 
+
 class CameraView extends StatefulWidget {
   CameraView(
       {Key? key,
@@ -90,21 +91,38 @@ class _CameraViewState extends State<CameraView> {
       child: Stack(
         fit: StackFit.expand,
         children: <Widget>[
-          Center(
-            child: _changingCameraLens
-                ? Center(
-                    child: const Text('Changing camera lens'),
-                  )
-                : CameraPreview(
-                    _controller!,
-                    child: widget.customPaint,
-                  ),
+          Column(
+            children: [
+              Center(
+                child: _changingCameraLens
+                    ? Center(
+                        child: const Text('Changing camera lens'),
+                      )
+                    : CameraPreview(
+                        _controller!,
+                        child: widget.customPaint,
+                      ),
+              ),
+
+              SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: (){Navigator.of(context).pushNamed('/home');} ,
+                style: ElevatedButton.styleFrom(
+
+                  padding: EdgeInsets.symmetric(horizontal: 50.0, vertical: 50.0), // Increase padding
+                  textStyle: TextStyle(fontSize: 20),
+                  // Increase font size
+                ),
+                child: Text("Home Page"),
+              ),
+            ],
+
           ),
 
           _switchLiveCameraToggle(),
+
           _detectionViewModeToggle(),
-          _zoomControl(),
-          _exposureControl(),
+
         ],
       ),
     );
